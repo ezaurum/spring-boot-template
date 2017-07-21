@@ -1,0 +1,129 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://repo.spring.io/libs-snapshot'
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+jar {
+    baseName = 'ExampleAdmin'
+    version = '1.0.0.RELEASE'
+    manifest {
+        attributes("Implementation-Title": "Gradle",
+                "Implementation-Version": version,
+                "Main-Class": "com.example.WebApplication")
+    }
+}
+
+dependencies {
+
+    //common
+    compile('org.apache.commons:commons-pool2:2.0')
+    compile('commons-lang:commons-lang:2.6')
+    compile('org.projectlombok:lombok:1.16.8')
+    compile('org.apache.httpcomponents:httpclient')
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.8.5'
+
+    // social
+   /* compile('org.springframework.boot:spring-boot-starter-social-facebook')*/
+
+    // Logger
+    compile('org.slf4j:slf4j-api')
+    compile('org.slf4j:jcl-over-slf4j')
+    compile('org.slf4j:log4j-over-slf4j')
+    compile('org.slf4j:jul-to-slf4j')
+    compile('ch.qos.logback:logback-classic')
+    compile('net.logstash.logback:logstash-logback-encoder:4.7')
+    compile('org.springframework.boot:spring-boot-starter-logging')
+
+    // redis
+    /*compile('org.springframework.data:spring-data-redis:1.8.1.RELEASE')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.5.RELEASE'
+    compile('redis.clients:jedis:2.9.0')*/
+
+    // DB
+   /* runtime('mysql:mysql-connector-java')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')*/
+
+    // 웹
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE")
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('net.sourceforge.nekohtml:nekohtml')
+    compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
+    // lib jar
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 테스트
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.2.RELEASE'
+    testCompile 'com.h2database:h2'
+    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+
+    // admin
+    compile('org.springframework.boot:spring-boot-starter-security')
+
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
+
+    // dev
+    compile('org.springframework.boot:spring-boot-devtools')
+
+    // WebJar
+    compile('org.webjars:bootstrap:3.3.6')
+    compile('org.webjars:jquery:2.2.1')
+}
+
+// commons-logging, log4j, jul 의존성 제거
+configurations {
+    all.collect { configuration ->
+        configuration.exclude group: 'commons-logging', module: 'commons-logging'
+        configuration.exclude group: 'log4j', module: 'log4j'
+        configuration.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        configuration.exclude group: 'org.slf4j', module: 'slf4j-jcl'
+        configuration.exclude group: 'org.slf4j', module: 'slf4j-jdk14'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// profile run
+
+bootRun {
+    addResources = true
+    systemProperty 'spring.profiles.active', System.properties['spring.profiles.active']
+}
+
+task devRun {
+    doLast {
+        bootRun { systemProperty "spring.profiles.active", "dev" }
+    }
+}
+configure(devRun) {
+    group = "Run"
+    description = "Custom Run Group"
+}
+
+devRun.finalizedBy bootRun

@@ -1,0 +1,20 @@
+#admin:
+#  image: siv-server-dev:latest
+#  links:
+#    - mysql
+#    - redis
+#   restart: unless-stopped
+#   ports:
+#    - "8432:8432"
+mysql:
+  image: mariadb
+  ports:
+   - "13306:3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=mypass
+#   - MYSQL_DATABASE=game
+# volumes:
+# DB initialize query
+# - ./db_dump:/docker-entrypoint-initdb.d/
+redis:
+  image: redis

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head lang="en" th:fragment="html_head">
+
+    <title>Octave Games Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <meta charset="utf-8"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css}"
+          rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="static/skin/css/select2.css"
+          th:href="@{/skin/css/select2.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/iCheck/icheck.all.css"
+          th:href="@{/skin/css/iCheck/icheck.all.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/jquery.datetimepicker.css"
+          th:href="@{/skin/css/jquery.datetimepicker.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/AdminLTE.min.css"
+          th:href="@{/skin/css/AdminLTE.min.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/skins/_all-skins.min.css"
+          th:href="@{/skin/css/skins/_all-skins.min.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/jClocksGMT.css"
+          th:href="@{/skin/css/jClocksGMT.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/c3.min.css"
+          th:href="@{/skin/css/c3.min.css}" media="screen"/>
+    <link rel="stylesheet" href="static/skin/css/admin.css"
+          th:href="@{/skin/css/admin.css}" media="screen"/>
+
+</head>
+<body class="hold-transition sidebar-mini skin-red-light">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header" th:fragment="header">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>O</b>G</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Octave</b>Games</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="static/skin/img/user2-160x160.jpg" th:src="@{/skin/img/user2-160x160.jpg}"
+                                 class="user-image"
+                                 alt="User Image"/>
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="static/skin/img/user2-160x160.jpg" th:src="@{/skin/img/user2-160x160.jpg}"
+                                     class="img-circle"
+                                     alt="User Image"/>
+
+                                <p>
+                                    Admin
+                                    <small>Member since Nov. 2012</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <form th:action="@{/logout}" method="post">
+                                        <input type="submit" class="btn btn-default btn-flat" value="Sign out"/>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <aside class="main-sidebar sidebar sidebar3"
+           layout:replace="fragment/main-sidebar :: main-sidebar"></aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Page Header
+                <small>Optional description</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+
+            <!-- Your Page Content Here -->
+
+        </section>
+
+        <!-- Pagination Bar -->
+        <div th:fragment="paginationbar">
+            <ul class="pagination pagination-sm no-margin">
+                <li th:class="${page.first}? 'disabled' : ''">
+                    <span th:if="${page.first}">← First</span>
+                    <a th:if="${not page.first}"
+                       th:href="@{${page.url}(page=0,size=${page.size},sort=${page.sort},q=${q})}">←
+                        First</a>
+                </li>
+                <li th:class="${page.hasPrevious}? '' : 'disabled'">
+                    <span th:if="${not page.hasPrevious}">«</span>
+                    <a th:if="${page.hasPrevious}"
+                       th:href="@{${page.url}(page=${page.number-2},size=${page.size},sort=${page.sortString},q=${q})}"
+                       title="Go to previous page">«</a>
+                </li>
+                <li th:each="item : ${page.items}" th:class="${item.current}? 'active' : ''">
+                    <span th:if="${item.current}" th:text="${item.number}">1</span>
+                    <a th:if="${not item.current}"
+                       th:href="@{${page.url}(page=${item.number-1},size=${page.size},sort=${page.sortString},q=${q})}"><span
+                            th:text="${item.number}">1</span></a>
+                </li>
+                <li th:class="${page.hasNext}? '' : 'disabled'">
+                    <span th:if="${not page.hasNext}">»</span>
+                    <a th:if="${page.hasNext}"
+                       th:href="@{${page.url}(page=${page.number},size=${page.size},sort=${page.sortString},q=${q})}"
+                       title="Go to next page">»</a>
+                </li>
+                <li th:class="${page.last}? 'disabled' : ''">
+                    <span th:if="${page.last}">Last →</span>
+                    <a th:if="${not page.last}"
+                       th:href="@{${page.url}(page=${page.totalPages-1},size=${page.size},sort=${page.sortString},q=${q})}">Last
+                        →</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer" th:fragment="footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2016 <a href="#">Octave Games</a>.</strong> All rights reserved.
+    </footer>
+
+</div>
+
+<div th:fragment="script-area">
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.6/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src="static/skin/js/app.min.js" th:src="@{/skin/js/app.min.js}"></script>
+    <script src="static/skin/js/select2.full.min.js" th:src="@{/skin/js/select2.full.min.js}"></script>
+    <script src="static/skin/js/icheck.min.js" th:src="@{/skin/js/icheck.min.js}"></script>
+    <script src="static/skin/js/jquery.datetimepicker.full.min.js"
+            th:src="@{/skin/js/jquery.datetimepicker.full.min.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.js" th:src="@{/skin/js/jquery.inputmask.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.extensions.js"
+            th:src="@{/skin/js/jquery.inputmask.extensions.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.date.extensions.js"
+            th:src="@{/skin/js/jquery.inputmask.date.extensions.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.numeric.extensions.js"
+            th:src="@{/skin/js/jquery.inputmask.numeric.extensions.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.phone.extensions.js"
+            th:src="@{/skin/js/jquery.inputmask.phone.extensions.js}"></script>
+    <script src="static/skin/js/jquery.inputmask.regex.extensions.js"
+            th:src="@{/skin/js/jquery.inputmask.regex.extensions.js}"></script>
+    <script src="static/skin/js/jquery.popupWindow.js" th:src="@{/skin/js/jquery.popupWindow.js}"></script>
+    <script src="static/skin/js/jquery.rotate.js" th:src="@{/skin/js/jquery.rotate.js}"></script>
+    <script src="static/skin/js/jClocksGMT.js" th:src="@{/skin/js/jClocksGMT.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.min.js" charset="utf-8"></script>
+    <script src="static/js/c3.min.js" th:src="@{/js/c3.min.js}"></script>
+    <script src="static/skin/js/admin.js" th:src="@{/skin/js/admin.js}"></script>
+</div>
+</body>
+</html>

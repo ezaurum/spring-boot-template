@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<aside th:fragment="main-sidebar">
+    <nav>
+        <li sec:authorize="hasRole('ROLE_STAFF')">
+            <a href="/staff">Staff</a>
+        </li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/admin">Admin</a>
+        </li>
+    </nav>
+</aside>
+</body>
+</html>

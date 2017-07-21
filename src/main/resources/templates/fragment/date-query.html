@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<form method="get" class="row" th:fragment="date-query">
+    <label for="date-start" class="col-md-2">시작날짜</label>
+    <input type="text" id="date-start" name="from"
+           class="dash_date col-md-2"
+           placeholder="2016-01-01" th:value="${from}"/>
+    <label for="date-end" class="col-md-2">종료날짜</label>
+    <input type="text" id="date-end" name="to"
+           class="dash_date col-md-2"
+           placeholder="2016-01-01" th:value="${to}"/>
+    <button class="btn btn-sm col-md-1 btn-default"><i class="fa fa-search"></i></button>
+</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragment/head :: head" layout:fragment="html-head">
+    <title>Example Admin</title>
+</head>
+<body>
+
+<!-- Main Header -->
+<header class="main-header" layout:fragment="header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+        Logo
+    </a>
+</header>
+<aside th:replace="fragment/main-sidebar :: main-sidebar" layout:fragment="main-sidebar"></aside>
+<div th:replace="fragment/error :: error-panel"></div>
+
+<div class="content-wrapper" layout:fragment="content-wrapper">
+    <main layout:fragment="main" class="content">
+        Empty
+    </main>
+</div>
+
+<!-- Main Footer -->
+<footer class="main-footer" layout:fragment="footer">
+    <strong>Copyright &copy; 2017 <a href="#">Example</a>.</strong> All rights reserved.
+</footer>
+
+<th:block layout:fragment="script-block"></th:block>
+</body>
+</html>
